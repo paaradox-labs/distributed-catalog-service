@@ -20,13 +20,13 @@ export class CategoryController {
         }
 
         const { name, priceConfiguration, attributes } = req.body as Category;
+        // throw new Error("some error")
 
         const category = await this.categoryService.create({
             name,
             priceConfiguration,
             attributes,
         });
-
         this.logger.info(`Created category:`, { id: category._id });
 
         res.json({
