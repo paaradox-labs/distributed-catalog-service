@@ -22,6 +22,9 @@ importers:
             express:
                 specifier: ^5.2.1
                 version: 5.2.1
+            express-fileupload:
+                specifier: ^1.5.2
+                version: 1.5.2
             express-jwt:
                 specifier: ^8.5.1
                 version: 8.5.1
@@ -56,6 +59,9 @@ importers:
             "@types/express":
                 specifier: ^5.0.6
                 version: 5.0.6
+            "@types/express-fileupload":
+                specifier: ^1.5.1
+                version: 1.5.1
             "@types/http-errors":
                 specifier: ^2.0.5
                 version: 2.0.5
@@ -844,6 +850,12 @@ packages:
                 integrity: sha512-HLFeCYgz89uk22N5Qg3dvGvsv46B8GLvKKo1zKG4NybA8U2DiEO3w9lqGg29t/tfLRJpJ6iQxnVw4OnB7MoM9g==,
             }
 
+    "@types/busboy@1.5.4":
+        resolution:
+            {
+                integrity: sha512-kG7WrUuAKK0NoyxfQHsVE6j1m01s6kMma64E+OZenQABMQyTJop1DumUWcLwAQ2JzpefU7PDYoRDKl8uZosFjw==,
+            }
+
     "@types/connect@3.4.38":
         resolution:
             {
@@ -874,6 +886,12 @@ packages:
         resolution:
             {
                 integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==,
+            }
+
+    "@types/express-fileupload@1.5.1":
+        resolution:
+            {
+                integrity: sha512-DllImBVI1lCyjl2klky/TEwk60mbNebgXv1669h66g9TfptWSrEFq5a/raHSutaFzjSm1tmn9ypdNfu4jPSixQ==,
             }
 
     "@types/express-serve-static-core@5.1.1":
@@ -1570,6 +1588,13 @@ packages:
                 integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==,
             }
 
+    busboy@1.6.0:
+        resolution:
+            {
+                integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==,
+            }
+        engines: { node: ">=10.16.0" }
+
     bytes@3.1.2:
         resolution:
             {
@@ -2167,6 +2192,13 @@ packages:
                 integrity: sha512-PMARsyh/JtqC20HoGqlFcIlQAyqUtW4PlI1rup1uhYJtKuwAjbvWi3GQMAn+STdHum/dk8xrKfUM1+5SAwpolA==,
             }
         engines: { node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0 }
+
+    express-fileupload@1.5.2:
+        resolution:
+            {
+                integrity: sha512-wxUJn2vTHvj/kZCVmc5/bJO15C7aSMyHeuXYY3geKpeKibaAoQGcEv5+sM6nHS2T7VF+QHS4hTWPiY2mKofEdg==,
+            }
+        engines: { node: ">=12.0.0" }
 
     express-jwt@8.5.1:
         resolution:
@@ -3928,6 +3960,13 @@ packages:
             }
         engines: { node: ">= 0.8" }
 
+    streamsearch@1.1.0:
+        resolution:
+            {
+                integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==,
+            }
+        engines: { node: ">=10.0.0" }
+
     string-argv@0.3.2:
         resolution:
             {
@@ -5036,6 +5075,10 @@ snapshots:
             "@types/connect": 3.4.38
             "@types/node": 24.12.4
 
+    "@types/busboy@1.5.4":
+        dependencies:
+            "@types/node": 24.12.4
+
     "@types/connect@3.4.38":
         dependencies:
             "@types/node": 24.12.4
@@ -5049,6 +5092,11 @@ snapshots:
     "@types/esrecurse@4.3.1": {}
 
     "@types/estree@1.0.9": {}
+
+    "@types/express-fileupload@1.5.1":
+        dependencies:
+            "@types/busboy": 1.5.4
+            "@types/express": 5.0.6
 
     "@types/express-serve-static-core@5.1.1":
         dependencies:
@@ -5473,6 +5521,10 @@ snapshots:
 
     buffer-from@1.1.2: {}
 
+    busboy@1.6.0:
+        dependencies:
+            streamsearch: 1.1.0
+
     bytes@3.1.2: {}
 
     call-bind-apply-helpers@1.0.2:
@@ -5785,6 +5837,10 @@ snapshots:
             jest-message-util: 30.4.1
             jest-mock: 30.4.1
             jest-util: 30.4.1
+
+    express-fileupload@1.5.2:
+        dependencies:
+            busboy: 1.6.0
 
     express-jwt@8.5.1:
         dependencies:
@@ -6964,6 +7020,8 @@ snapshots:
             escape-string-regexp: 2.0.0
 
     statuses@2.0.2: {}
+
+    streamsearch@1.1.0: {}
 
     string-argv@0.3.2: {}
 
