@@ -150,8 +150,10 @@ export class ProductController {
 
         if (isPublish === "true") {
             filters.isPublish = true;
-        } else {
+        } else if (isPublish === "false") {
             filters.isPublish = false;
+        } else {
+            filters.isPublish = true;
         }
 
         if (tenantId) filters.tenantId = tenantId as string;
@@ -167,6 +169,12 @@ export class ProductController {
         const products = await this.productService.getProducts(
             q as string,
             filters,
+            {
+                page: req.query.page ? parseInt(req.query.page as string) : 1,
+                limit: req.query.limit
+                    ? parseInt(req.query.limit as string)
+                    : 10,
+            },
         );
         this.logger.info(`Fetched products:`, { count: products.length });
 
