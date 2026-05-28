@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import config from "config";
 
 import {
@@ -8,6 +6,7 @@ import {
     S3Client,
 } from "@aws-sdk/client-s3";
 import { FileData, FileStorage } from "../types/storage";
+import createHttpError from "http-errors";
 
 export class S3Storage implements FileStorage {
     private client: S3Client;
@@ -39,6 +38,16 @@ export class S3Storage implements FileStorage {
         await this.client.send(new DeleteObjectCommand(objectParams));
     }
     getObjectUri(filename: string): string {
-        throw new Error("Method not implemented.");
+        // https://mernspace-backend-project.s3.us-east-1.amazonaws.com/292ce08d-0a87-4104-8f31-5f9ae5e8cc44
+
+        const bucket = config.get("s3.bucket");
+        const region = config.get("s3.region");
+
+        if (typeof bucket === "string" && typeof region === "string") {
+            return `https://${config.get("s3.bucket")}.s3.${config.get("s3.region")}.amazonaws.com/${filename}`;
+        }
+
+        const error = createHttpError(500, "Invalid S3 Configuration");
+        throw error;
     }
 }
