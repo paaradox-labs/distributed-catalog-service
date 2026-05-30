@@ -10,6 +10,7 @@ import { UploadedFile } from "express-fileupload";
 import { AuthRequest } from "../common/types";
 import mongoose from "mongoose";
 import { Logger } from "winston";
+import { Roles } from "../common/constants";
 
 export class ProductController {
     constructor(
@@ -19,6 +20,7 @@ export class ProductController {
     ) {}
 
     create = async (req: Request, res: Response, next: NextFunction) => {
+        const role = (req as AuthRequest).auth.role;
         const result = validationResult(req);
         if (!result.isEmpty()) {
             return next(createHttpError(400, result.array()[0].msg as string));
@@ -29,7 +31,7 @@ export class ProductController {
 
         const { tenantId } = req.body;
 
-        if (String(tenant) !== tenantId) {
+        if (role !== Roles.ADMIN && String(tenant) !== tenantId) {
             return next(createHttpError(403, "Forbidden"));
         }
 
@@ -73,6 +75,7 @@ export class ProductController {
     };
 
     update = async (req: Request, res: Response, next: NextFunction) => {
+        const role = (req as AuthRequest).auth.role;
         const result = validationResult(req);
         if (!result.isEmpty()) {
             return next(createHttpError(400, result.array()[0].msg as string));
@@ -90,7 +93,7 @@ export class ProductController {
 
         const tenant = (req as AuthRequest).auth.tenant;
 
-        if (product.tenantId !== tenant) {
+        if (role !== Roles.ADMIN && product.tenantId !== tenant) {
             return next(createHttpError(403, "Forbidden"));
         }
 
