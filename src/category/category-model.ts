@@ -18,25 +18,30 @@ const priceConfigurationSchema = new mongoose.Schema<PriceConfiguration>(
     },
 );
 
-const attributeSchema = new mongoose.Schema<Attribute>({
-    name: {
-        type: String,
-        required: true,
+const attributeSchema = new mongoose.Schema<Attribute>(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        widgetType: {
+            type: String,
+            enum: ["switch", "radio"],
+            required: true,
+        },
+        defaultValue: {
+            type: mongoose.Schema.Types.Mixed,
+            required: true,
+        },
+        availableOptions: {
+            type: [String],
+            required: true,
+        },
     },
-    widgetType: {
-        type: String,
-        enum: ["switch", "radio"],
-        required: true,
+    {
+        _id: false,
     },
-    defaultValue: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true,
-    },
-    availableOptions: {
-        type: [String],
-        required: true,
-    },
-});
+);
 
 const categorySchema = new mongoose.Schema<Category>(
     {
