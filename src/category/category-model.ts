@@ -1,17 +1,22 @@
 import mongoose from "mongoose";
 import { Attribute, Category, PriceConfiguration } from "./category-types";
 
-const priceConfigurationSchema = new mongoose.Schema<PriceConfiguration>({
-    priceType: {
-        type: String,
-        enum: ["base", "additional"],
-        required: true,
+const priceConfigurationSchema = new mongoose.Schema<PriceConfiguration>(
+    {
+        priceType: {
+            type: String,
+            enum: ["base", "additional"],
+            required: true,
+        },
+        availableOptions: {
+            type: [String],
+            required: true,
+        },
     },
-    availableOptions: {
-        type: [String],
-        required: true,
+    {
+        _id: false,
     },
-});
+);
 
 const attributeSchema = new mongoose.Schema<Attribute>({
     name: {
