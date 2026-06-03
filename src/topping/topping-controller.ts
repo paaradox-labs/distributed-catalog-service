@@ -49,7 +49,7 @@ export class ToppingController {
             const readyToppings = toppings.map((topping) => {
                 return {
                     name: topping.name,
-                    price: topping.name,
+                    price: topping.price,
                     tenantId: topping.tenantId,
                     image: this.storage.getObjectUri(topping.image),
                 };
