@@ -48,8 +48,9 @@ export class ToppingController {
             // todo: add error handling
             const readyToppings = toppings.map((topping) => {
                 return {
+                    id: String(topping._id),
                     name: topping.name,
-                    price: topping.name,
+                    price: topping.price,
                     tenantId: topping.tenantId,
                     image: this.storage.getObjectUri(topping.image),
                 };
