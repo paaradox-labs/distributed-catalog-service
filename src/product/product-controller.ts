@@ -155,8 +155,6 @@ export class ProductController {
             filters.isPublish = true;
         } else if (isPublish === "false") {
             filters.isPublish = false;
-        } else {
-            filters.isPublish = true;
         }
 
         if (tenantId) filters.tenantId = tenantId as string;
