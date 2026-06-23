@@ -11,12 +11,14 @@ import { AuthRequest } from "../common/types";
 import mongoose from "mongoose";
 import { Logger } from "winston";
 import { Roles } from "../common/constants";
+import { MessageProducerBroker } from "../common/types/broker";
 
 export class ProductController {
     constructor(
         private productService: ProductService,
         private storage: FileStorage,
         private logger: Logger,
+        private broker: MessageProducerBroker,
     ) {}
 
     create = async (req: Request, res: Response, next: NextFunction) => {
@@ -66,6 +68,16 @@ export class ProductController {
         };
         const newProduct = await this.productService.createProduct(
             product as Product,
+        );
+
+        // Send product to Kafka
+        // todo: move topic name to config
+        await this.broker.sendMessage(
+            "product",
+            JSON.stringify({
+                id: newProduct._id,
+                priceConfiguration: newProduct.priceConfiguration,
+            }),
         );
 
         // todo: send response
@@ -136,9 +148,19 @@ export class ProductController {
             image: imageName ? imageName : (oldImage as string),
         };
 
-        await this.productService.updateProduct(
+        const updatedProduct = await this.productService.updateProduct(
             productId as string,
             productToUpdate,
+        );
+
+        // Send product to Kafka
+        // todo: move topic name to config
+        await this.broker.sendMessage(
+            "product",
+            JSON.stringify({
+                id: updatedProduct._id,
+                priceConfiguration: updatedProduct.priceConfiguration,
+            }),
         );
 
         res.json({
