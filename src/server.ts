@@ -20,7 +20,7 @@ const startServer = async () => {
     } catch (err: unknown) {
         if (err instanceof Error) {
             if (messageProducerbroker) {
-                messageProducerbroker.disconnect();
+                await messageProducerbroker.disconnect();
             }
             logger.error(err.message);
             logger.on("finish", () => {
