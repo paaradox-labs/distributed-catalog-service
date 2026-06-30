@@ -1,4 +1,4 @@
-# Catalog Service
+# MERN Space - Catalog Service
 
 A microservice for managing product catalogs in a multi-tenant food ordering system. Built with Express, TypeScript, MongoDB, Kafka, and AWS S3.
 
