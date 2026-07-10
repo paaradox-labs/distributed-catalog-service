@@ -4,19 +4,19 @@ A microservice for managing product catalogs in a multi-tenant food ordering sys
 
 ## Tech Stack
 
-| Layer        | Technology                                                      |
-|-------------|-----------------------------------------------------------------|
-| Runtime     | Node.js (v24.10.0)                                              |
-| Language    | TypeScript                                                      |
-| Framework   | Express v5                                                      |
-| Database    | MongoDB via Mongoose + `mongoose-aggregate-paginate-v2`         |
-| Auth        | JWKS-based (express-jwt + jwks-rsa)                             |
-| Messaging   | Apache Kafka via KafkaJS                                        |
-| Storage     | AWS S3 (@aws-sdk/client-s3)                                     |
-| Validation  | express-validator                                               |
-| Testing     | Jest + ts-jest + Supertest                                      |
-| Logging     | Winston                                                        |
-| Config      | node-config (YAML)                                              |
+| Layer      | Technology                                              |
+| ---------- | ------------------------------------------------------- |
+| Runtime    | Node.js (v24.10.0)                                      |
+| Language   | TypeScript                                              |
+| Framework  | Express v5                                              |
+| Database   | MongoDB via Mongoose + `mongoose-aggregate-paginate-v2` |
+| Auth       | JWKS-based (express-jwt + jwks-rsa)                     |
+| Messaging  | Apache Kafka via KafkaJS                                |
+| Storage    | AWS S3 (@aws-sdk/client-s3)                             |
+| Validation | express-validator                                       |
+| Testing    | Jest + ts-jest + Supertest                              |
+| Logging    | Winston                                                 |
+| Config     | node-config (YAML)                                      |
 
 ## Project Structure
 
@@ -38,27 +38,30 @@ src/
 ## API Endpoints
 
 ### Categories
-| Method | Path                          | Auth | Role  | Description        |
-|--------|-------------------------------|------|-------|--------------------|
-| POST   | `/categories`                 | Yes  | ADMIN | Create category    |
-| GET    | `/categories`                 | No   | --    | List categories    |
-| GET    | `/categories/:categoryId`     | No   | --    | Get category by ID |
-| PATCH  | `/categories/:id`             | Yes  | ADMIN | Update category    |
+
+| Method | Path                      | Auth | Role  | Description        |
+| ------ | ------------------------- | ---- | ----- | ------------------ |
+| POST   | `/categories`             | Yes  | ADMIN | Create category    |
+| GET    | `/categories`             | No   | --    | List categories    |
+| GET    | `/categories/:categoryId` | No   | --    | Get category by ID |
+| PATCH  | `/categories/:id`         | Yes  | ADMIN | Update category    |
 
 ### Products
-| Method | Path                           | Auth | Role          | Description         |
-|--------|-------------------------------|------|---------------|---------------------|
-| POST   | `/products`                    | Yes  | ADMIN/MANAGER | Create product      |
-| PUT    | `/products/:productId`         | Yes  | ADMIN/MANAGER | Update product      |
-| GET    | `/products`                    | No   | --            | List products       |
+
+| Method | Path                   | Auth | Role          | Description    |
+| ------ | ---------------------- | ---- | ------------- | -------------- |
+| POST   | `/products`            | Yes  | ADMIN/MANAGER | Create product |
+| PUT    | `/products/:productId` | Yes  | ADMIN/MANAGER | Update product |
+| GET    | `/products`            | No   | --            | List products  |
 
 Query params for `GET /products`: `q`, `tenantId`, `categoryId`, `isPublish`, `page`, `limit`.
 
 ### Toppings
-| Method | Path            | Auth | Role          | Description    |
-|--------|----------------|------|---------------|----------------|
-| POST   | `/toppings`     | Yes  | ADMIN/MANAGER | Create topping |
-| GET    | `/toppings`     | No   | --            | List toppings  |
+
+| Method | Path        | Auth | Role          | Description    |
+| ------ | ----------- | ---- | ------------- | -------------- |
+| POST   | `/toppings` | Yes  | ADMIN/MANAGER | Create topping |
+| GET    | `/toppings` | No   | --            | List toppings  |
 
 ## Getting Started
 
@@ -77,12 +80,12 @@ npm run dev          # starts on port 5502
 
 ## Scripts
 
-| Script          | Purpose                              |
-|-----------------|--------------------------------------|
-| `npm run dev`   | Start dev server with hot-reload     |
-| `npm run build` | Compile TypeScript                   |
-| `npm test`      | Run tests                            |
-| `npm run lint`  | Lint all files                       |
+| Script          | Purpose                          |
+| --------------- | -------------------------------- |
+| `npm run dev`   | Start dev server with hot-reload |
+| `npm run build` | Compile TypeScript               |
+| `npm test`      | Run tests                        |
+| `npm run lint`  | Lint all files                   |
 
 ## Docker
 
