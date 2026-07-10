@@ -1,6 +1,8 @@
 import { NextFunction, Response, Request } from "express";
 import { UploadedFile } from "express-fileupload";
 import { v4 as uuidv4 } from "uuid";
+import { validationResult } from "express-validator";
+import createHttpError from "http-errors";
 import { FileStorage } from "../common/types/storage";
 import { ToppingService } from "./topping-service";
 import { CreataeRequestBody, Topping } from "./topping-types";
@@ -19,6 +21,13 @@ export class ToppingController {
         next: NextFunction,
     ) => {
         try {
+            const result = validationResult(req);
+            if (!result.isEmpty()) {
+                return next(
+                    createHttpError(400, result.array()[0].msg as string),
+                );
+            }
+
             const image = req.files!.image as UploadedFile;
             const fileUuid = uuidv4();
 
