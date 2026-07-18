@@ -4,7 +4,7 @@ RUN corepack enable && corepack prepare pnpm@11 --activate
 
 WORKDIR /usr/src/app
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 RUN HUSKY=0 pnpm install
 
